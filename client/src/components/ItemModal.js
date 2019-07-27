@@ -30,15 +30,17 @@ class ItemModal extends Component {
 	};
 
 	onChange = event => {
-		this.setState({ [event.target.name]: event.target.value });
+		const { name, value } = event.target;
+		this.setState({ [name]: value });
 	};
 
 	onSubmit = event => {
 		event.preventDefault();
+		const { name } = this.state;
 
 		const newItem = {
 			id: uuid(),
-			name: this.state.name
+			name
 		};
 
 		this.props.addItem(newItem);
@@ -47,17 +49,19 @@ class ItemModal extends Component {
 	};
 
 	render() {
+		const { modal } = this.state;
+
 		return (
 			<div>
 				<Button
 					color="dark"
 					style={{ marginBottom: "2rem" }}
-					onClick={this.toggle.bind(this)}
+					onClick={this.toggle}
 				>
 					ADD
 				</Button>
 
-				<Modal isOpen={this.state.modal} toggle={this.toggle}>
+				<Modal isOpen={modal} toggle={this.toggle}>
 					<ModalHeader toggle={this.toggle}>Add to list</ModalHeader>
 					<ModalBody>
 						<Form onSubmit={this.onSubmit}>
@@ -82,8 +86,8 @@ class ItemModal extends Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	item: state.item
+const mapStateToProps = ({ item }) => ({
+	item
 });
 
 export default connect(
