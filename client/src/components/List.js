@@ -21,13 +21,13 @@ class List extends Component {
 				<ListGroup>
 					<TransitionGroup className="list">
 						{items.map(item => (
-							<CSSTransition key={item.id} timeout={1000} classNames="fade">
+							<CSSTransition key={item._id} timeout={1000} classNames="fade">
 								<ListGroupItem>
 									<Button
 										className="remove-btn"
 										color="danger"
 										size="sm"
-										onClick={this.onClickDelete.bind(this, item.id)}
+										onClick={this.onClickDelete.bind(this, item._id)}
 									>
 										DELETE
 									</Button>

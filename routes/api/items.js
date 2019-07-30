@@ -29,7 +29,7 @@ router.post("/", (request, response) => {
 // @access  Public
 router.delete("/:id", (request, response) => {
 	Item.findById(request.params.id)
-		.then(item => Item.remove().then(() => response.json({ success: true })))
+		.then(item => item.remove().then(() => response.json({ success: true })))
 		.catch(err => response.status(404).json({ success: false }));
 });
 
